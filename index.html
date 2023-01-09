@@ -1,0 +1,127 @@
+<html onclick="jack();">
+<head>
+<meta name="viewport" content="width=device-width, intial-scale=1">
+<style>
+*{
+margin:0;
+padding:0;
+ overflow-x: hidden;
+}
+
+#p1{
+height:190px;
+width:65px;
+position:relative;
+top:288px;
+text-center: center;
+
+}
+.animate{
+animation-name:jack1;
+animation-duration:1.6s;
+animation-iteration-count: infinite;
+}
+@keyframes jack1{
+0%{top:288px;}
+30%{top:125px;}
+65%{to:167px}
+80%{top:250px;}
+100%{top:288px;}
+}
+
+#p2{
+
+height:80px;
+width:59px;
+position:relative;
+top:153px;
+left:500px;
+animation-name:jack2;
+animation-duration:1.5s;
+animation-iteration-count: infinite;
+}
+
+@keyframes jack2{
+0%{
+left:500px;
+}
+100%{
+ left:-80px;
+}
+}
+
+#p4{
+position:relative;
+border:1px solid red;
+top:20px;
+display: block;
+width:125px;
+margin:auto;
+background-color:pink;
+text-align: center;
+}
+
+
+#videoBG {
+ position:relative;
+ display: block;
+margin-top:-95px;
+ z-index: -1;
+ width:100%;
+ height:550px;
+ top:-175px;
+ }
+ #n1{
+     position:relative;
+     top:60px;
+     text-align: center;
+ }
+
+ #div{border:1px solid red;
+ height:1000px;
+ width:800px;
+ }
+</style>
+<title>Jumping Game</title>
+</head>
+<body>
+<div id="div">
+<p class="bar" id="p1">
+<img src="1.png" width="29px" height="96px">
+</p>
+<p class="bar" id="p2">
+<img src="2.png" height="70px" width="39px">
+</p>
+</div>
+<p id="p4">score:&nbsp<span id="scorespan"></span></p>
+
+<h2 id="n1">Touch anywhere of the screen</h2>
+</body>
+<script type="text/javascript">
+
+var p1 = document.getElementById("p1");
+var p2 = document.getElementById("p2");
+var counter=0;
+function jack(){
+    if(p1.classList == "animate"){return}
+    p1.classList.add("animate");
+    setTimeout(function(){
+        p1.classList.remove("animate");
+    },300);
+}
+var checkDead = setInterval(function() {
+    let p1Top = parseInt(window.getComputedStyle(p1).getPropertyValue("top"));
+    let p2Left = parseInt(window.getComputedStyle(p2).getPropertyValue("left"));
+    if(p2Left<59 && p2Left>-4 && p1Top>=259)
+    {p2.style.animation = "none";
+   alert("Game Over score: "+Math.floor(counter/100));
+      /*  prompt("Do you wants to play again?")*/
+        counter=0;
+        p2.style.animation= "jack2 0.8s infinite";
+    }else{
+        counter++;
+        document.getElementById("scorespan").innerHTML = Math.floor(counter/100);
+    }
+},10);
+</script>
+</html>
